@@ -1,29 +1,36 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { Octicons, Feather, Entypo, AntDesign } from '@expo/vector-icons';
-export default function Tweet() {
+
+
+export default function Tweet(props) {
+   console.log(props)
    return (
       <View style={styles.mainCont}>
-         <View style={styles.leftCont}><Image style={styles.img} source={{ uri: 'https://pbs.twimg.com/profile_images/950815117448499200/XVFH6rjh_400x400.jpg' }} />
+         <View style={styles.leftCont}><Image style={styles.img} source={{ uri: props.data.img }} />
          </View>
          <View style={styles.rightCont}>
             <View style={styles.titleBar}>
                <Text style={styles.title} numberOfLines={1} ellipsizeMode='tail'>
-                  Alina grande{" "}<Text >
+                  {props.data.name}{" "}<Text >
                      <Octicons style={styles.verify} name="verified" size={16} color="#55ADED" /></Text>
-                  <Text style={styles.userId} numberOfLines={1} ellipsizeMode='tail'>{" "}@alianaGrande</Text>
+                  <Text style={styles.userId} numberOfLines={1} ellipsizeMode='tail'>{" "}@{props.data.userId}</Text>
                </Text>
-               <Text style={styles.time}>{" "} <Entypo name="dot-single" size={13} color="gray" />{" "}8h</Text>
+               <Text style={styles.time}>{" "} <Entypo name="dot-single" size={13} color="gray" />{" "}{props.data.time}</Text>
                <Text style={styles.more}><Feather name="more-horizontal" size={20} color="gray" /></Text>
             </View>
-            <View style={styles.tweetContent} ><Text style={styles.tweetTxt}>Do you have any web dev projects if yes then see this itsd a new tweet which was used by lorem ipsum dolar new lorem ipasum daolr </Text>
-               <Image style={styles.tweetedImg} source={{ uri: 'https://i.pinimg.com/originals/12/52/68/125268895881409af0fa4b7eed214a57.jpg' }} />
+            <View style={styles.tweetContent} ><Text style={styles.tweetTxt}>{props.data.tweet}</Text>
+               {props.data.tweetImg.map((item, index) => {
+                  return <Image style={styles.tweetedImg} source={{ uri: item.img }} key={index} />
+               })}
+
+
             </View>
             <View style={styles.bottomBar}>
-               <Text style={styles.bottomBtn}><Feather name="message-circle" size={20} color="gray" /></Text>
-               <Text style={styles.bottomBtn}><AntDesign name="hearto" size={20} color="gray" />{" "}20</Text>
-               <Text style={styles.bottomBtn}><AntDesign name="retweet" size={20} color="gray" /></Text>
-               <Text style={styles.bottomBtn}><Feather name="share" size={20} color="gray" /></Text>
+               <View style={styles.bottomBtn} ><Feather name="message-circle" size={20} color="gray" /></View>
+               <View style={styles.bottomBtn}><AntDesign name="hearto" size={18} color="gray" /><Text style={{ color: 'gray', marginLeft: 10 }}>{props.data.likes}</Text></View>
+               <View style={styles.bottomBtn} ><AntDesign name="retweet" size={20} color="gray" /><Text style={{ color: 'gray', marginLeft: 10 }}>{props.data.retweets}</Text></View>
+               <View style={styles.bottomBtn}><Feather name="share" size={18} color="gray" /><Text style={{ color: 'gray', marginLeft: 10 }}>{props.data.shares}</Text></View>
 
             </View>
          </View>
@@ -88,7 +95,7 @@ const styles = StyleSheet.create({
    tweetContent: {
       paddingTop: 2,
       display: 'flex',
-      alignItems: 'center',
+
 
    },
    tweetedImg: {
@@ -109,9 +116,10 @@ const styles = StyleSheet.create({
       paddingRight: 10,
       marginTop: 5
    }
-   , bottomBtn: {
+   ,
+   bottomBtn: {
       display: 'flex',
-      justifyContent: 'center',
-      color: 'red'
+      flexDirection: 'row'
    }
+
 })

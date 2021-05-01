@@ -7,7 +7,7 @@ import { Ionicons, Feather, AntDesign, MaterialCommunityIcons } from '@expo/vect
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-
+import { Image } from 'react-native'
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import HomeScreen from '../screens/HomeScreen';
@@ -83,7 +83,9 @@ function HomeNavigator() {
             marginLeft: 15,
 
           },
-          headerLeft: () => (<MaterialCommunityIcons name="face-profile" size={30} color="#55ADED" />),
+          headerLeft: () => (<Image
+            style={{ width: 30, height: 30, borderRadius: 15, borderColor: 'black', borderWidth: 2 }}
+            source={{ uri: 'https://pbs.twimg.com/profile_images/1333834936667820035/FB9N4Qyx_400x400.jpg' }} />),
           headerRight: () => (<MaterialCommunityIcons name="star-four-points-outline" size={24} color="#55ADED" />),
           headerTitle: () => (<AntDesign style={{ textAlign: 'center' }} name="twitter" size={24} color="#55ADED" />)
         }}
