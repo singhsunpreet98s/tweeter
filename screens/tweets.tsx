@@ -10,9 +10,9 @@ export const tweets = [
             img: 'https://codelist.biz/wp-content/uploads/2020/05/1585387326_975828_1585387454_rrss_normal.jpg'
          }
       ],
-      likes: 30,
-      retweets: 10,
-      shares: 1,
+      likes: '30',
+      retweets: '10',
+      shares: '1',
       time: '2d'
    },
    {
@@ -26,9 +26,9 @@ export const tweets = [
             img: 'https://images.livemint.com/rf/Image-621x414/LiveMint/Period2/2018/01/13/Photos/Processed/sonar-k0XG--621x414@LiveMint.jpg'
          }
       ],
-      likes: 30,
-      retweets: 10,
-      shares: 6,
+      likes: '30',
+      retweets: '10',
+      shares: '6',
       time: '1d'
    },
    {
@@ -44,7 +44,7 @@ export const tweets = [
       ],
       likes: '3k',
       retweets: '1.2k',
-      shares: 120,
+      shares: '120',
       time: '4h'
    },
    {
@@ -59,8 +59,8 @@ export const tweets = [
          }
       ],
       likes: '9k',
-      retweets: 601,
-      shares: 90,
+      retweets: '601',
+      shares: '90',
       time: '6h'
    },
 

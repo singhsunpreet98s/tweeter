@@ -6,6 +6,7 @@
 export type RootStackParamList = {
   Root: undefined;
   NotFound: undefined;
+  newTweet: undefined;
 };
 
 export type BottomTabParamList = {
@@ -18,6 +19,7 @@ export type BottomTabParamList = {
 
 export type HomeNavigatorParamList = {
   HomeScreen: undefined;
+
 };
 
 export type SearchNavigatorParamList = {

@@ -1,26 +1,36 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { Octicons, Feather, Entypo, AntDesign } from '@expo/vector-icons';
+export interface TweetProps {
+   data: {
+      img: string,
+      name: string,
+      userId: string,
+      time: string, tweet: string,
+      tweetImg: [{ img: string, name: string }],
+      likes: string,
+      retweets: string,
+      shares: string
+   }
+}
 
-
-export default function Tweet(props) {
-   console.log(props)
+export default function Tweet({ data }: TweetProps) {
    return (
       <View style={styles.mainCont}>
-         <View style={styles.leftCont}><Image style={styles.img} source={{ uri: props.data.img }} />
+         <View style={styles.leftCont}><Image style={styles.img} source={{ uri: data.img }} />
          </View>
          <View style={styles.rightCont}>
             <View style={styles.titleBar}>
                <Text style={styles.title} numberOfLines={1} ellipsizeMode='tail'>
-                  {props.data.name}{" "}<Text >
+                  {data.name}{" "}<Text >
                      <Octicons style={styles.verify} name="verified" size={16} color="#55ADED" /></Text>
-                  <Text style={styles.userId} numberOfLines={1} ellipsizeMode='tail'>{" "}@{props.data.userId}</Text>
+                  <Text style={styles.userId} numberOfLines={1} ellipsizeMode='tail'>{" "}@{data.userId}</Text>
                </Text>
-               <Text style={styles.time}>{" "} <Entypo name="dot-single" size={13} color="gray" />{" "}{props.data.time}</Text>
+               <Text style={styles.time}>{" "} <Entypo name="dot-single" size={13} color="gray" />{" "}{data.time}</Text>
                <Text style={styles.more}><Feather name="more-horizontal" size={20} color="gray" /></Text>
             </View>
-            <View style={styles.tweetContent} ><Text style={styles.tweetTxt}>{props.data.tweet}</Text>
-               {props.data.tweetImg.map((item, index) => {
+            <View style={styles.tweetContent} ><Text style={styles.tweetTxt}>{data.tweet}</Text>
+               {data.tweetImg.map((item, index) => {
                   return <Image style={styles.tweetedImg} source={{ uri: item.img }} key={index} />
                })}
 
@@ -28,9 +38,9 @@ export default function Tweet(props) {
             </View>
             <View style={styles.bottomBar}>
                <View style={styles.bottomBtn} ><Feather name="message-circle" size={20} color="gray" /></View>
-               <View style={styles.bottomBtn}><AntDesign name="hearto" size={18} color="gray" /><Text style={{ color: 'gray', marginLeft: 10 }}>{props.data.likes}</Text></View>
-               <View style={styles.bottomBtn} ><AntDesign name="retweet" size={20} color="gray" /><Text style={{ color: 'gray', marginLeft: 10 }}>{props.data.retweets}</Text></View>
-               <View style={styles.bottomBtn}><Feather name="share" size={18} color="gray" /><Text style={{ color: 'gray', marginLeft: 10 }}>{props.data.shares}</Text></View>
+               <View style={styles.bottomBtn}><AntDesign name="hearto" size={18} color="gray" /><Text style={{ color: 'gray', marginLeft: 10 }}>{data.likes}</Text></View>
+               <View style={styles.bottomBtn} ><AntDesign name="retweet" size={20} color="gray" /><Text style={{ color: 'gray', marginLeft: 10 }}>{data.retweets}</Text></View>
+               <View style={styles.bottomBtn}><Feather name="share" size={18} color="gray" /><Text style={{ color: 'gray', marginLeft: 10 }}>{data.shares}</Text></View>
 
             </View>
          </View>
