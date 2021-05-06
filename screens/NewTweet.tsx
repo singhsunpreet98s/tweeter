@@ -1,20 +1,47 @@
 import React, { useState } from 'react'
-import { SafeAreaView, View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
+import { SafeAreaView, View, Text, StyleSheet, Platform, TouchableOpacity, TextInput, KeyboardAvoidingView } from 'react-native';
+import { AntDesign, Entypo, Foundation, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
+
+import { useNavigation } from '@react-navigation/native';
+
 export default function NewTweet() {
-   const [tweetTxt, setTweetTxt] = useState("sssss")
+   const [tweetTxt, setTweetTxt] = useState("adbbfkjs")
+   const navigate = useNavigation();
+
    return (
       <SafeAreaView style={styles.shutter}>
          <View style={styles.cont}>
             <View style={styles.btns}>
-               <AntDesign name="close" size={24} color="black" />
-               <TouchableOpacity style={(tweetTxt.length > 4) ? styles.ActivetweetBtn : styles.inActivetweetBtn}>
+               <AntDesign name="close" style={{ padding: 5 }} size={30} color="black" onPress={() => navigate.goBack()} />
+               <TouchableOpacity style={((tweetTxt.length > 4) && (tweetTxt.length < 120)) ? styles.ActivetweetBtn : styles.inActivetweetBtn}>
                   <Text style={{ color: 'white', fontWeight: 'bold' }}>Tweet</Text>
                </TouchableOpacity>
             </View>
             <View style={styles.tweetCont}>
 
+               <TextInput
+                  style={styles.input}
+                  onChangeText={(e) => {
+
+                     setTweetTxt(e)
+                  }}
+                  value={tweetTxt}
+                  autoFocus={true}
+                  multiline={true}
+               />
             </View>
+            <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}>
+               <View style={styles.bottom}>
+                  <View style={styles.bottomBtns} >
+                     <Entypo name="camera" size={24} color='#55ADED' />
+                     <Foundation name="photo" size={24} color='#55ADED' />
+                     <MaterialCommunityIcons name="google-maps" size={24} color='#55ADED' />
+                     <MaterialCommunityIcons name="gif" size={24} color='#55ADED' />
+                     <FontAwesome5 name="chart-bar" size={24} color='#55ADED' />
+                  </View>
+                  <Text style={(tweetTxt.length < 120) ? { color: '#55ADED', width: 100, fontWeight: 'bold', textAlign: 'center' } : { color: 'red', width: 100, fontWeight: 'bold', textAlign: 'center' }}>{(tweetTxt.length < 120) ? 120 - tweetTxt.length : "limit exceed"}</Text>
+               </View>
+            </KeyboardAvoidingView>
          </View>
 
       </SafeAreaView>
@@ -39,7 +66,6 @@ const styles = StyleSheet.create({
    },
    ActivetweetBtn: {
       marginRight: 5,
-
       backgroundColor: '#55ADED',
       borderRadius: 20,
       height: 40,
@@ -50,14 +76,33 @@ const styles = StyleSheet.create({
    ,
    inActivetweetBtn: {
       marginRight: 5,
-      padding: 8,
-      paddingRight: 14,
-      paddingLeft: 14,
+      height: 40,
+      width: 80,
+      alignItems: 'center',
+      justifyContent: 'center',
       backgroundColor: '#1da1f278',
-
       borderRadius: 20
    },
+   input: {
+      margin: 12,
+      fontSize: 20
+
+   },
+   bottom: {
+      height: 40,
+      flexDirection: 'row',
+      alignItems: 'center'
+   }
+   ,
    tweetCont: {
+      flex: 1,
+   },
+   bottomBtns: {
+      display: 'flex',
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-around',
 
    }
+
 })
