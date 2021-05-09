@@ -5,30 +5,30 @@ import { AntDesign, Entypo, Foundation, MaterialCommunityIcons, FontAwesome5 } f
 import { useNavigation } from '@react-navigation/native';
 
 export default function NewTweet() {
-   const [tweetTxt, setTweetTxt] = useState("adbbfkjs")
+   const [tweetTxt, setTweetTxt] = useState("")
    const navigate = useNavigation();
-   var rexExpa = /(@[a-z\d])/g
-   var rexExpb = /(#[a-z\d])/g
-   const tweetArr = tweetTxt.split(" ")
-   const TweetHere = () => {
-      // var rexExpa = /(@[a-z\d])/g
-      // var rexExpb = /(#[a-z\d])/g
-      // const tweetArr = tweetTxt.split(" ")
-      tweetArr.map((item, index) => {
-         if (item[0] === "@") {
-            return <Text style={{ color: 'red' }}>{item}</Text>
+   // var rexExpa = /(@[a-z\d])/g
+   // var rexExpb = /(#[a-z\d])/g
+   // const tweetArr = tweetTxt.split(" ")
+   // const TweetHere = () => {
+   //    // var rexExpa = /(@[a-z\d])/g
+   //    // var rexExpb = /(#[a-z\d])/g
+   //    // const tweetArr = tweetTxt.split(" ")
+   //    tweetArr.map((item, index) => {
+   //       if (item[0] === "@") {
+   //          return <Text style={{ color: 'red' }}>{item}</Text>
 
-         }
-         else if (item[0] === "#") {
-            return <Text style={{ color: 'blue' }}>{item}</Text>
+   //       }
+   //       else if (item[0] === "#") {
+   //          return <Text style={{ color: 'blue' }}>{item}</Text>
 
-         }
-         else {
-            return <Text>{item}</Text>
-         }
+   //       }
+   //       else {
+   //          return <Text>{item}</Text>
+   //       }
 
-      })
-   }
+   //    })
+   // }
    return (
       <SafeAreaView style={styles.shutter}>
          <View style={styles.cont}>
@@ -39,28 +39,14 @@ export default function NewTweet() {
                </TouchableOpacity>
             </View>
             <View style={styles.tweetCont}>
-               <Text>{
-                  tweetArr.map((item, index) => {
-                     if (item[0] === "@") {
-                        return <Text style={{ color: 'red' }} key={index} >{` ${item}`}</Text>
 
-                     }
-                     else if (item[0] === "#") {
-                        return <Text style={{ color: 'blue' }} key={index}>{` ${item}`}</Text>
-
-                     }
-                     else {
-                        return <Text key={index}>{` ${item}`}</Text>
-                     }
-
-                  })}</Text>
                <TextInput
                   style={styles.input}
                   onChangeText={(e) => {
 
                      setTweetTxt(e)
                   }}
-
+                  value={tweetTxt}
                   autoFocus={true}
                   multiline={true}
                />
