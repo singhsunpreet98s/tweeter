@@ -1,28 +1,45 @@
 import * as React from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
 import Tweet from '../components/tweet/Tweet'
-
-import { Text, View } from '../components/Themed';
+import { View } from '../components/Themed';
 import { tweets } from './tweets';
+import { FlatList } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 
 import TweetBtn from '../screens/TweetBtn';
-export type TypeData = { img: String, name: String, userId: String, time: String, tweet: String, tweetImg: [{ img: String, name: String }], likes: String, retweets: String, shares: String }
-export default function TabOneScreen() {
-  const navigation = useNavigation()
+export interface TweetProps {
+  data: {
+    img: string,
+    name: string,
+    userId: string,
+    time: string, tweet: string,
+    tweetImg: { img: string, name: string }[],
+    likes: string,
+    retweets: string,
+    shares: string
+  }
+}
 
+export default function Home() {
+  const [isRefreshing, setRefresh] = React.useState(false)
+  const navigation = useNavigation()
+  const renderItem = ({ item }: any) => {
+    console.log(item)
+    return <Tweet data={item} />
+  }
 
   return (
+
     <View style={styles.container}>
       <TweetBtn />
-      <ScrollView>
-        {
-          tweets.map((item, index) => {
-            return <Tweet data={item} key={index} />
-          }
-          )
-        }
-      </ScrollView>
+
+
+      <FlatList
+        data={tweets}
+        renderItem={renderItem}
+        refreshing={isRefreshing}
+        onRefresh={() => setRefresh(true)}
+      />
     </View>
   );
 }
@@ -30,8 +47,6 @@ export default function TabOneScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
-
   },
 
 });

@@ -7,14 +7,14 @@ export interface TweetProps {
       name: string,
       userId: string,
       time: string, tweet: string,
-      tweetImg: [{ img: string, name: string }],
+      tweetImg: { img: string, name: string }[],
       likes: string,
       retweets: string,
       shares: string
    }
 }
-
 export default function Tweet({ data }: TweetProps) {
+   const tweetArr = data.tweet.split(" ")
    return (
       <View style={styles.mainCont}>
          <View style={styles.leftCont}><Image style={styles.img} source={{ uri: data.img }} />
@@ -29,7 +29,40 @@ export default function Tweet({ data }: TweetProps) {
                <Text style={styles.time}>{" "} <Entypo name="dot-single" size={13} color="gray" />{" "}{data.time}</Text>
                <Text style={styles.more}><Feather name="more-horizontal" size={20} color="gray" /></Text>
             </View>
-            <View style={styles.tweetContent} ><Text style={styles.tweetTxt}>{data.tweet}</Text>
+            <View style={styles.tweetContent} ><Text style={styles.tweetTxt}>
+               {
+                  tweetArr.map((item, index) => {
+                     if (index === 0) {
+                        if (item[0] === "@") {
+                           return <Text style={{ color: '#55ADED' }}>{`${item}`}</Text>
+
+                        }
+                        else if (item[0] === "#") {
+                           return <Text style={{ color: '#55ADED' }}>{`${item}`}</Text>
+
+                        }
+                        else {
+                           return <Text>{`${item}`}</Text>
+                        }
+                     }
+                     else {
+                        if (item[0] === "@") {
+                           return <Text style={{ color: '#55ADED' }}>{` ${item}`}</Text>
+
+                        }
+                        else if (item[0] === "#") {
+                           return <Text style={{ color: '#55ADED' }}>{` ${item}`}</Text>
+
+                        }
+                        else {
+                           return <Text>{` ${item}`}</Text>
+                        }
+
+                     }
+                  }
+                  )
+               }
+            </Text>
                {data.tweetImg.map((item, index) => {
                   return <Image style={styles.tweetedImg} source={{ uri: item.img }} key={index} />
                })}
@@ -116,7 +149,7 @@ const styles = StyleSheet.create({
       resizeMode: 'cover',
    },
    tweetTxt: {
-      fontSize: 15
+      fontSize: 17
    },
    bottomBar: {
       display: 'flex',
